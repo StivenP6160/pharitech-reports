@@ -1,6 +1,8 @@
 
 const { Router } = require('express');
 const pool = require('../config/db');
+const companyController = require('../controllers/companyController');
+
 
 const router = Router();
 
@@ -9,5 +11,6 @@ router.get('/health', async (req, res) => {
   const { rows } = await pool.query('SELECT NOW() AS hora');
   res.json({ status: 'ok', database: 'conectada', hora: rows[0].hora });
 });
+router.post('/configureCompany', companyController.configureCompany);
 
 module.exports = router;
